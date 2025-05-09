@@ -1,4 +1,5 @@
-﻿using Mednote.Client.Models;
+﻿// Services/Interfaces/IStorageService.cs
+using Mednote.Client.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -45,5 +46,12 @@ namespace Mednote.Client.Services.Interfaces
         /// </summary>
         /// <returns>List of audio file paths</returns>
         Task<IEnumerable<string>> GetAllAudioFilesAsync();
+
+        /// <summary>
+        /// Securely deletes all data associated with a transcription
+        /// </summary>
+        /// <param name="id">ID of the transcription to delete</param>
+        /// <returns>True if all data was deleted successfully, false otherwise</returns>
+        Task<bool> SecurelyDeleteAllDataAsync(string id);
     }
 }
