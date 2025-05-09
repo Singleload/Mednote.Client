@@ -258,13 +258,18 @@
 
                     <!-- API offline Warning -->
                     <materialDesign:Chip 
-                              Background="{StaticResource WarningBrush}"
-                              Foreground="White"
-                              Icon="Warning"
-                              Content="API offline, omtranskribering inte tillgänglig"
-                              Visibility="{Binding IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                              IsEnabled="False"
-                              Margin="8"/>
+    Background="{StaticResource WarningBrush}"
+    IconBackground="{StaticResource ErrorBrush}"
+    IconForeground="White"
+    Foreground="White"
+    Content="API offline, omtranskribering inte tillgänglig"
+    Visibility="{Binding IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+    IsEnabled="False"
+    Margin="8">
+                        <materialDesign:Chip.Icon>
+                            <materialDesign:PackIcon Kind="Warning" />
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
                 </StackPanel>
 
                 <!-- Transcription Content -->

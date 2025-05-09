@@ -89,31 +89,36 @@
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
                     <!-- Start Recording Button -->
                     <Button Command="{Binding StartRecordingCommand}" 
-                            Style="{StaticResource MaterialDesignFloatingActionButton}"
-                            ToolTip="Starta inspelning"
-                            Margin="8"
-                            Visibility="{Binding IsRecording, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="Starta inspelning"
+                        Margin="8"
+                        Background="{StaticResource RecordingBrush}"
+                        BorderBrush="{StaticResource RecordingBrush}"
+                        Foreground="White"
+                        Visibility="{Binding IsRecording, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                         <materialDesign:PackIcon Kind="Record" Width="24" Height="24"/>
                     </Button>
 
                     <!-- Pause/Resume Button -->
                     <Button Command="{Binding PauseResumeRecordingCommand}" 
-                            Style="{StaticResource MaterialDesignFloatingActionButton}"
-                            ToolTip="{Binding IsPaused, Converter={StaticResource BooleanToStringConverter}, ConverterParameter='Återuppta inspelning|Pausa inspelning'}"
-                            Visibility="{Binding IsRecording, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Margin="8">
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="{Binding IsPaused, Converter={StaticResource BooleanToStringConverter}, ConverterParameter='Återuppta inspelning|Pausa inspelning'}"
+                        Foreground="White"
+                        Visibility="{Binding IsRecording, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="8">
                         <materialDesign:PackIcon Kind="{Binding IsPaused, Converter={StaticResource BooleanToIconConverter}, ConverterParameter='Play|Pause'}" 
-                                                 Width="24" Height="24"/>
+                             Width="24" Height="24"/>
                     </Button>
 
                     <!-- Stop Recording Button -->
                     <Button Command="{Binding StopRecordingCommand}" 
-                            Style="{StaticResource MaterialDesignFloatingActionButton}"
-                            Background="Red"
-                            BorderBrush="Red"
-                            ToolTip="Stoppa inspelning"
-                            Visibility="{Binding IsRecording, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Margin="8">
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Background="{StaticResource RecordingBrush}"
+                        BorderBrush="{StaticResource RecordingBrush}"
+                        Foreground="White"
+                        ToolTip="Stoppa inspelning"
+                        Visibility="{Binding IsRecording, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="8">
                         <materialDesign:PackIcon Kind="Stop" Width="24" Height="24"/>
                     </Button>
 
@@ -128,13 +133,18 @@
 
                     <!-- Transcription Disabled Warning -->
                     <materialDesign:Chip 
-                              Background="{StaticResource WarningBrush}"
-                              Foreground="White"
-                              Icon="Warning"
-                              Content="API offline, transkribering inte tillgänglig"
-                              Visibility="{Binding DataContext.IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              IsEnabled="False"
-                              Margin="8"/>
+                        Background="{StaticResource WarningBrush}"
+                        IconBackground="{StaticResource ErrorBrush}"
+                        IconForeground="White"
+                        Foreground="White"
+                        Margin="8"
+                        Visibility="{Binding DataContext.IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        IsEnabled="False">
+                        <materialDesign:Chip.Icon>
+                            <materialDesign:PackIcon Kind="Warning" />
+                        </materialDesign:Chip.Icon>
+                        <TextBlock Text="API offline, transkribering inte tillgänglig" />
+                    </materialDesign:Chip>
 
                     <!-- Cancel Transcription Button -->
                     <Button Command="{Binding CancelCommand}" 
