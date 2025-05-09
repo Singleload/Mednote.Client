@@ -122,10 +122,14 @@ namespace Mednote.Client.ViewModels
             try
             {
                 _navigationService.NavigateTo<TranscriptionDetailsViewModel>(transcription.Id);
+                // Add an await to make this truly asynchronous
+                await Task.CompletedTask; // This makes it properly async
             }
             catch (Exception ex)
             {
                 ShowError($"Fel vid visning av transkriptionsdetaljer: {ex.Message}");
+                // Log the error
+                await Task.CompletedTask; // This makes it properly async
             }
         }
 

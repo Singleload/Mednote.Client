@@ -16,8 +16,8 @@ namespace Mednote.Client
 {
     public partial class App : Application
     {
-        // This property needs to be public and static to be accessible from views
-        public static IServiceProvider Services { get; private set; }
+        // Add the required modifier to indicate this property must be initialized
+        public static IServiceProvider? Services { get; private set; }
 
         public App()
         {
@@ -39,6 +39,12 @@ namespace Mednote.Client
             {
                 // Configure services
                 ConfigureServices();
+
+                // Ensure Services is not null
+                if (Services == null)
+                {
+                    throw new InvalidOperationException("Services provider failed to initialize");
+                }
 
                 // Create and show the main window
                 var mainWindow = new MainWindow

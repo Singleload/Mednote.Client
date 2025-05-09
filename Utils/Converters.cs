@@ -60,7 +60,8 @@ namespace Mednote.Client
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            // This is a one-way converter, so we return a default value
+            return DependencyProperty.UnsetValue;
         }
     }
 
@@ -82,7 +83,8 @@ namespace Mednote.Client
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            // This is a one-way converter, so we return a default value
+            return DependencyProperty.UnsetValue;
         }
     }
 
@@ -105,7 +107,8 @@ namespace Mednote.Client
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            // This is a one-way converter, so we return a default value
+            return DependencyProperty.UnsetValue;
         }
     }
 
@@ -130,7 +133,8 @@ namespace Mednote.Client
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            // This is a one-way converter, so we return a default value
+            return DependencyProperty.UnsetValue;
         }
     }
 
@@ -148,7 +152,8 @@ namespace Mednote.Client
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            // This is a one-way converter, so we return a default value
+            return DependencyProperty.UnsetValue;
         }
     }
 
@@ -166,7 +171,8 @@ namespace Mednote.Client
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            // This is a one-way converter, so we return a default value
+            return DependencyProperty.UnsetValue;
         }
     }
 }

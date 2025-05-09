@@ -219,8 +219,8 @@ namespace Mednote.Client.Services.Implementation
 
             try
             {
-                // Delete the file
-                File.Delete(filePath);
+                // Delete the file using async File operations
+                await Task.Run(() => File.Delete(filePath));
 
                 Serilog.Log.Information($"Deleted audio file: {filePath}");
 
@@ -231,13 +231,13 @@ namespace Mednote.Client.Services.Implementation
                     string filenameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
                     string searchPattern = filenameWithoutExt + "*";
 
-                    var relatedFiles = Directory.GetFiles(directory, searchPattern);
+                    var relatedFiles = await Task.Run(() => Directory.GetFiles(directory, searchPattern));
                     foreach (var file in relatedFiles)
                     {
                         // Don't try to delete the original file again
                         if (file != filePath && File.Exists(file))
                         {
-                            File.Delete(file);
+                            await Task.Run(() => File.Delete(file));
                             Serilog.Log.Information($"Deleted related file: {file}");
                         }
                     }
@@ -263,8 +263,8 @@ namespace Mednote.Client.Services.Implementation
                 var settings = _settingsService.GetSettings();
                 var storageDir = settings.StorageDirectory;
 
-                // Get all wav files in the directory
-                var files = Directory.GetFiles(storageDir, "*.wav");
+                // Get all wav files in the directory using Task.Run to make it properly async
+                var files = await Task.Run(() => Directory.GetFiles(storageDir, "*.wav"));
 
                 return files;
             }

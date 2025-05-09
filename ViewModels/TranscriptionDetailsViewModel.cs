@@ -110,16 +110,16 @@ namespace Mednote.Client.ViewModels
             _storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
             _apiService = apiService ?? throw new ArgumentNullException(nameof(apiService));
 
-            // Initialize commands - remove all CanExecute predicates that might be disabling buttons
+            // Initialize commands correctly with lambda expressions
             LoadTranscriptionCommand = new AsyncRelayCommand(LoadTranscriptionAsync);
             PlayAudioCommand = new AsyncRelayCommand(PlayAudioAsync);
-            StopAudioCommand = new RelayCommand(StopAudio);
+            StopAudioCommand = new RelayCommand(() => StopAudio());
             CopyTextCommand = new AsyncRelayCommand<string>(CopyTextAsync);
             EditCommand = new AsyncRelayCommand(BeginEditAsync);
             SaveCommand = new AsyncRelayCommand(SaveChangesAsync);
-            CancelEditCommand = new RelayCommand(CancelEdit);
+            CancelEditCommand = new RelayCommand(() => CancelEdit());
             DeleteCommand = new AsyncRelayCommand(DeleteTranscriptionAsync);
-            BackCommand = new RelayCommand(NavigateBack);
+            BackCommand = new RelayCommand(() => NavigateBack());
             RetranscribeCommand = new AsyncRelayCommand(RetranscribeAsync);
             CheckApiCommand = new AsyncRelayCommand(CheckApiConnectionAsync);
 
@@ -209,7 +209,7 @@ namespace Mednote.Client.ViewModels
             });
         }
 
-        private void StopAudio(object? _)
+        private void StopAudio()
         {
             try
             {
@@ -308,7 +308,7 @@ namespace Mednote.Client.ViewModels
             });
         }
 
-        private void CancelEdit(object? _)
+        private void CancelEdit()
         {
             IsEditing = false;
         }
@@ -333,7 +333,7 @@ namespace Mednote.Client.ViewModels
                 try
                 {
                     // Stop any playback
-                    StopAudio(null);
+                    StopAudio();
 
                     // Use the secure delete method from storage service
                     var success = await _storageService.SecurelyDeleteAllDataAsync(Transcription.Id);
@@ -365,7 +365,7 @@ namespace Mednote.Client.ViewModels
         private void NavigateBack()
         {
             // Stop any playback
-            StopAudio(null);
+            StopAudio();
 
             // Navigate back
             _navigationService.NavigateTo<HistoryViewModel>();
@@ -451,7 +451,7 @@ namespace Mednote.Client.ViewModels
         public override void Dispose()
         {
             // Stop any playback
-            StopAudio(null);
+            StopAudio();
 
             // Cancel any processing
             _processingCancellationTokenSource?.Cancel();
