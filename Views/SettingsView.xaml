@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="Mednote.Client.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mednote.Client.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" 
+                   Text="Inställningar"
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   Margin="0,0,0,16"/>
+
+        <!-- Settings Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Audio Devices Section -->
+                <materialDesign:Card Padding="16" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="Ljudenheter" 
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0,0,0,16"/>
+
+                        <!-- Input Devices -->
+                        <TextBlock Text="Mikrofonenhet" 
+                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                   Margin="0,0,0,8"/>
+
+                        <ComboBox ItemsSource="{Binding InputDevices}"
+                                  SelectedValue="{Binding SelectedInputDeviceId}"
+                                  SelectedValuePath="DeviceId"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  Margin="0,0,0,16"
+                                  materialDesign:HintAssist.Hint="Välj mikrofonenhet"/>
+
+                        <!-- Output Devices -->
+                        <TextBlock Text="Högtalarenhet" 
+                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                   Margin="0,0,0,8"/>
+
+                        <ComboBox ItemsSource="{Binding OutputDevices}"
+                                  SelectedValue="{Binding SelectedOutputDeviceId}"
+                                  SelectedValuePath="DeviceId"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  Margin="0,0,0,16"
+                                  materialDesign:HintAssist.Hint="Välj högtalarenhet"/>
+
+                        <!-- Refresh Devices Button -->
+                        <Button Command="{Binding RefreshDevicesCommand}"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="Uppdatera enhetslistor"
+                                HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- Storage Settings -->
+                <materialDesign:Card Padding="16" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="Lagringsplats" 
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0,0,0,16"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding StorageDirectory, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     materialDesign:HintAssist.Hint="Mapp för lagring av inspelningar"
+                                     Margin="0,0,16,0"
+                                     IsReadOnly="True"/>
+
+                            <Button Grid.Column="1"
+                                    Command="{Binding BrowseStorageDirectoryCommand}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Content="Bläddra..."/>
+                        </Grid>
+
+                        <!-- Clear Temporary Files Button -->
+                        <Button Command="{Binding ClearTemporaryFilesCommand}"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="Rensa temporära filer"
+                                HorizontalAlignment="Right"
+                                Margin="0,16,0,0"/>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- Transcription Options -->
+                <materialDesign:Card Padding="16" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="Transkriptionsalternativ" 
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0,0,0,16"/>
+
+                        <CheckBox Content="Starta transkribering automatiskt efter inspelningsstopp"
+                                  IsChecked="{Binding AutoStartTranscription}"
+                                  Margin="0,0,0,8"/>
+
+                        <CheckBox Content="Spara råinspelning (originalet utan konvertering)"
+                                  IsChecked="{Binding SaveRawAudio}"
+                                  Margin="0,0,0,8"/>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- API Status -->
+                <materialDesign:Card Padding="16" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="API-anslutning" 
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0,0,0,16"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="{Binding IsApiAvailable, Converter={StaticResource BooleanToIconConverter}, ConverterParameter='CheckCircleOutline|AlertCircleOutline'}"
+                                                         Foreground="{Binding IsApiAvailable, Converter={StaticResource BooleanToBrushConverter}, ConverterParameter='Success|Error'}"
+                                                         Width="24" Height="24"
+                                                         VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding IsApiAvailable, Converter={StaticResource BooleanToStringConverter}, ConverterParameter='API ansluten|API frånkopplad'}"
+                                           Margin="8,0,0,0"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <Button Grid.Column="1"
+                                    Command="{Binding CheckApiConnectionCommand}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Content="Kontrollera anslutning"/>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- About Section -->
+                <materialDesign:Card Padding="16">
+                    <StackPanel>
+                        <TextBlock Text="Om programmet" 
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0,0,0,16"/>
+
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="Mednote är ett program för medicinsk röstigenkänning och transkribering, som använder Google Cloud Speech-to-Text för transkribering och ChatGPT för bearbetning."/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <Run Text="Mednote All Rights Reserved"/>
+                            <LineBreak/>
+                            <Run Text="Skapad av "/>
+                            <Hyperlink NavigateUri="https://github.com/Singleload" RequestNavigate="Hyperlink_RequestNavigate">
+                                Dennis Enström
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Command="{Binding ResetSettingsCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Content="Återställ standardvärden"
+                    Margin="0,0,16,0"/>
+
+            <Button Command="{Binding SaveSettingsCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Content="Spara inställningar"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

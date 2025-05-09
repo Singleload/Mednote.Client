@@ -1,0 +1,241 @@
+﻿<UserControl x:Class="Mednote.Client.Views.RecordingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mednote.Client.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" 
+                   Text="Spela in samtal"
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   Margin="0,0,0,16"/>
+
+        <!-- API Status Warning Banner -->
+        <materialDesign:Card Grid.Row="1" 
+                             Background="{StaticResource WarningBrush}" 
+                             Foreground="White"
+                             Margin="0,0,0,16" 
+                             Padding="16"
+                             Visibility="{Binding IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="AlertCircleOutline" 
+                                         Width="24" 
+                                         Height="24" 
+                                         VerticalAlignment="Center" 
+                                         Margin="0,0,16,0"/>
+                <TextBlock Text="API-anslutning är inte tillgänglig. Du kan spela in, men transkribering kommer inte att fungera. Kontrollera din internetanslutning eller kontakta administratören." 
+                           TextWrapping="Wrap" 
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Recording Controls -->
+        <materialDesign:Card Grid.Row="2" Padding="16" Margin="0,0,0,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Recording Status & Time -->
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Ellipse Width="12" Height="12" 
+                                 Fill="{Binding RecordingStatusColor}" 
+                                 VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding RecordingStatusText}" 
+                                   Margin="8,0,0,0" 
+                                   VerticalAlignment="Center" 
+                                   Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="1" 
+                               Text="{Binding RecordingTime}" 
+                               FontFamily="Consolas" 
+                               FontSize="24" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+                </Grid>
+
+                <!-- Recording Title -->
+                <TextBox Grid.Row="1" 
+                         Text="{Binding RecordingTitle, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="Titel på inspelning"
+                         IsEnabled="{Binding IsRecording}"
+                         Margin="0,0,0,16"/>
+
+                <!-- Recording Controls Buttons -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+                    <!-- Start Recording Button -->
+                    <Button Command="{Binding StartRecordingCommand}" 
+                            Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            ToolTip="Starta inspelning"
+                            Margin="8"
+                            Visibility="{Binding IsRecording, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                        <materialDesign:PackIcon Kind="Record" Width="24" Height="24"/>
+                    </Button>
+
+                    <!-- Pause/Resume Button -->
+                    <Button Command="{Binding PauseResumeRecordingCommand}" 
+                            Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            ToolTip="{Binding IsPaused, Converter={StaticResource BooleanToStringConverter}, ConverterParameter='Återuppta inspelning|Pausa inspelning'}"
+                            Visibility="{Binding IsRecording, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Margin="8">
+                        <materialDesign:PackIcon Kind="{Binding IsPaused, Converter={StaticResource BooleanToIconConverter}, ConverterParameter='Play|Pause'}" 
+                                                 Width="24" Height="24"/>
+                    </Button>
+
+                    <!-- Stop Recording Button -->
+                    <Button Command="{Binding StopRecordingCommand}" 
+                            Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            Background="Red"
+                            BorderBrush="Red"
+                            ToolTip="Stoppa inspelning"
+                            Visibility="{Binding IsRecording, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Margin="8">
+                        <materialDesign:PackIcon Kind="Stop" Width="24" Height="24"/>
+                    </Button>
+
+                    <!-- Transcribe Button -->
+                    <Button Command="{Binding StartTranscriptionCommand}" 
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Starta transkribering"
+                            Content="Starta transkribering"
+                            Visibility="{Binding CanStartTranscription, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            IsEnabled="{Binding IsApiConnected}"
+                            Margin="8"/>
+
+                    <!-- Transcription Disabled Warning -->
+                    <materialDesign:Chip 
+                              Background="{StaticResource WarningBrush}"
+                              Foreground="White"
+                              Icon="Warning"
+                              Content="API offline, transkribering inte tillgänglig"
+                              Visibility="{Binding DataContext.IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              IsEnabled="False"
+                              Margin="8"/>
+
+                    <!-- Cancel Transcription Button -->
+                    <Button Command="{Binding CancelCommand}" 
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Avbryt transkribering"
+                            Content="Avbryt"
+                            Visibility="{Binding IsTranscribing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Margin="8"/>
+                </StackPanel>
+
+                <!-- Transcription Results -->
+                <Grid Grid.Row="3">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <!-- Empty state message -->
+                            <TextBlock Text="Ingen transkribering tillgänglig. Starta en inspelning först."
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Margin="0,32,0,0"
+                                       TextWrapping="Wrap"
+                                       Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                       Visibility="{Binding CurrentTranscription, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=Inverse}"/>
+
+                            <!-- Results Content -->
+                            <StackPanel Visibility="{Binding CurrentTranscription, Converter={StaticResource NullToVisibilityConverter}}">
+                                <!-- Raw Transcription Text -->
+                                <Expander Header="Rå transkribering från Google" 
+                                          IsExpanded="False" 
+                                          Margin="0,0,0,16">
+                                    <StackPanel>
+                                        <TextBox Text="{Binding CurrentTranscription.TranscriptionText, Mode=OneWay}" 
+                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 IsReadOnly="True"
+                                                 TextWrapping="Wrap"
+                                                 VerticalScrollBarVisibility="Auto"
+                                                 Height="150"
+                                                 Margin="0,8,0,8"/>
+
+                                        <Button Command="{Binding CopyTextCommand}" 
+                                                CommandParameter="raw"
+                                                Content="Kopiera rå text" 
+                                                HorizontalAlignment="Right"
+                                                Style="{StaticResource MaterialDesignFlatButton}"/>
+                                    </StackPanel>
+                                </Expander>
+
+                                <!-- Processed Text -->
+                                <TextBlock Text="Bearbetad text från ChatGPT" 
+                                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                           Margin="0,0,0,8"/>
+
+                                <Grid Margin="0,0,0,8">
+                                    <TextBox Text="{Binding CurrentTranscription.ProcessedText, Mode=OneWay}" 
+                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                             IsReadOnly="True"
+                                             TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             Height="200"
+                                             AcceptsReturn="True"/>
+
+                                    <materialDesign:Card Visibility="{Binding IsTranscribing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"
+                                                         Padding="16"
+                                                         UniformCornerRadius="4">
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                                         Value="0"
+                                                         IsIndeterminate="True"
+                                                         Width="40"
+                                                         Height="40"
+                                                         Margin="0,0,0,8"/>
+                                            <TextBlock Text="Transkriberar..." 
+                                                       HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </materialDesign:Card>
+                                </Grid>
+
+                                <Grid>
+                                    <Button Command="{Binding CopyTextCommand}" 
+                                            CommandParameter="processed"
+                                            Content="Kopiera bearbetad text" 
+                                            HorizontalAlignment="Right"
+                                            Style="{StaticResource MaterialDesignFlatButton}"/>
+
+                                    <Button Command="{Binding ViewTranscriptionDetailsCommand}" 
+                                            Content="Visa detaljer" 
+                                            HorizontalAlignment="Left"
+                                            Style="{StaticResource MaterialDesignFlatButton}"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+
+        <!-- Help Information -->
+        <materialDesign:Card Grid.Row="3" Padding="16">
+            <TextBlock TextWrapping="Wrap" Text="Tryck på inspelningsknappen för att starta en ny inspelning. Efter att inspelningen är avslutad, tryck på 'Starta transkribering' för att skicka ljudet till Google för transkribering och bearbetning med ChatGPT. Notera att inspelningen och transkriberingen innehåller känsliga patientdata."/>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

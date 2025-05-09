@@ -1,0 +1,395 @@
+﻿<UserControl x:Class="Mednote.Client.Views.TranscriptionDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mednote.Client.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Back Button -->
+            <Button Grid.Column="0"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Tillbaka">
+                <materialDesign:PackIcon Kind="ArrowLeft" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Title -->
+            <TextBlock Grid.Column="1" 
+                       Text="Transkriptionsdetaljer"
+                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                       VerticalAlignment="Center"/>
+
+            <!-- Delete Button -->
+            <Button Grid.Column="2"
+                    Command="{Binding DeleteCommand}"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Ta bort transkription">
+                <materialDesign:PackIcon Kind="Delete" Width="24" Height="24"/>
+            </Button>
+        </Grid>
+
+        <!-- API Status Warning -->
+        <materialDesign:Card Grid.Row="1" 
+                             Background="{StaticResource WarningBrush}" 
+                             Foreground="White"
+                             Margin="0,0,0,16" 
+                             Padding="16"
+                             Visibility="{Binding IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="AlertCircleOutline" 
+                                         Width="24" 
+                                         Height="24" 
+                                         VerticalAlignment="Center" 
+                                         Margin="0,0,16,0"/>
+                <TextBlock Text="API-anslutning är inte tillgänglig. Omtranskribering kommer inte att fungera. Kontrollera din internetanslutning eller kontakta administratören." 
+                           TextWrapping="Wrap" 
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Transcription Details -->
+        <materialDesign:Card Grid.Row="2" Padding="16" Margin="0,0,0,16">
+            <StackPanel>
+                <!-- Title and Edit Mode Toggle -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Title (Normal Mode) -->
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding Transcription.Title}"
+                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                               Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+
+                    <!-- Title (Edit Mode) -->
+                    <TextBox Grid.Column="0"
+                             Text="{Binding EditedTitle, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             materialDesign:HintAssist.Hint="Titel"
+                             Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <!-- Edit Button -->
+                    <Button Grid.Column="1"
+                            Command="{Binding EditCommand}"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="Redigera information"
+                            Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                        <materialDesign:PackIcon Kind="Edit" Width="20" Height="20"/>
+                    </Button>
+                </Grid>
+
+                <!-- Metadata -->
+                <Grid Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Created Date -->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="Skapad:" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Margin="0,0,8,0"
+                               Opacity="0.6"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="1"
+                               Text="{Binding Transcription.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+
+                    <!-- Duration -->
+                    <TextBlock Grid.Row="0" Grid.Column="2"
+                               Text="Längd:" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Margin="16,0,8,0"
+                               Opacity="0.6"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="3"
+                               Text="{Binding Transcription.DurationString}" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+
+                    <!-- Patient ID (Normal Mode) -->
+                    <TextBlock Grid.Row="1" Grid.Column="0"
+                               Text="Patient-ID:" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Margin="0,8,8,0"
+                               Opacity="0.6"
+                               Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1"
+                               Text="{Binding Transcription.PatientId}" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Margin="0,8,0,0"
+                               Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+
+                    <!-- Patient ID (Edit Mode) -->
+                    <TextBlock Grid.Row="1" Grid.Column="0"
+                               Text="Patient-ID:" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Margin="0,8,8,0"
+                               Opacity="0.6"
+                               Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             Text="{Binding EditedPatientId, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             materialDesign:HintAssist.Hint="Patient-ID"
+                             Margin="0,8,16,0"
+                             Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </Grid>
+
+                <!-- Notes (Normal Mode) -->
+                <StackPanel Margin="0,16,0,0"
+                            Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <TextBlock Text="Anteckningar:" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Opacity="0.6"/>
+
+                    <TextBlock Text="{Binding Transcription.Notes}" 
+                               Style="{StaticResource MaterialDesignBody1TextBlock}"
+                               TextWrapping="Wrap"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Notes (Edit Mode) -->
+                <StackPanel Margin="0,16,0,0"
+                            Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="Anteckningar:" 
+                               Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Opacity="0.6"/>
+
+                    <TextBox Text="{Binding EditedNotes, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             materialDesign:HintAssist.Hint="Anteckningar"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             Height="100"
+                             Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Edit Mode Buttons -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            Margin="0,16,0,0"
+                            Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Button Command="{Binding CancelEditCommand}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Content="Avbryt"
+                            Margin="0,0,16,0"/>
+
+                    <Button Command="{Binding SaveCommand}"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Content="Spara"/>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Audio Player -->
+        <materialDesign:Card Grid.Row="3" Padding="16" Margin="0,0,0,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Text="Ljudinspelning" 
+                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                           Margin="0,0,0,16"/>
+
+                <!-- Audio Controls -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+                    <!-- Play Button -->
+                    <Button Command="{Binding PlayAudioCommand}"
+                            Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            ToolTip="Spela upp"
+                            Visibility="{Binding IsPlaying, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                            Margin="8">
+                        <materialDesign:PackIcon Kind="Play" Width="24" Height="24"/>
+                    </Button>
+
+                    <!-- Stop Button -->
+                    <Button Command="{Binding StopAudioCommand}"
+                            Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            Background="Red"
+                            BorderBrush="Red"
+                            ToolTip="Stoppa uppspelning"
+                            Visibility="{Binding IsPlaying, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Margin="8">
+                        <materialDesign:PackIcon Kind="Stop" Width="24" Height="24"/>
+                    </Button>
+
+                    <!-- Retranscribe Button -->
+                    <Button Command="{Binding RetranscribeCommand}"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Content="Gör om transkriberingen"
+                            ToolTip="Gör om transkriberingen från ljudinspelningen"
+                            IsEnabled="{Binding IsApiConnected}"
+                            Margin="16,0,0,0"/>
+
+                    <!-- API offline Warning -->
+                    <materialDesign:Chip 
+                              Background="{StaticResource WarningBrush}"
+                              Foreground="White"
+                              Icon="Warning"
+                              Content="API offline, omtranskribering inte tillgänglig"
+                              Visibility="{Binding IsApiConnected, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                              IsEnabled="False"
+                              Margin="8"/>
+                </StackPanel>
+
+                <!-- Transcription Content -->
+                <TabControl Grid.Row="2">
+                    <!-- Raw Google Text -->
+                    <TabItem Header="Rå transkribering">
+                        <Grid>
+                            <TextBox Text="{Binding Transcription.TranscriptionText, Mode=OneWay}"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     IsReadOnly="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     AcceptsReturn="True"
+                                     Margin="0,8"/>
+
+                            <Button Command="{Binding CopyTextCommand}"
+                                    CommandParameter="raw"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    ToolTip="Kopiera text"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,16,16,0">
+                                <materialDesign:PackIcon Kind="ContentCopy" />
+                            </Button>
+                        </Grid>
+                    </TabItem>
+
+                    <!-- Processed ChatGPT Text -->
+                    <TabItem Header="Bearbetad text" IsSelected="True">
+                        <Grid>
+                            <TextBox Text="{Binding Transcription.ProcessedText, Mode=OneWay}"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     IsReadOnly="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     AcceptsReturn="True"
+                                     Margin="0,8"/>
+
+                            <Button Command="{Binding CopyTextCommand}"
+                                    CommandParameter="processed"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    ToolTip="Kopiera text"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,16,16,0">
+                                <materialDesign:PackIcon Kind="ContentCopy" />
+                            </Button>
+
+                            <!-- Processing Overlay -->
+                            <materialDesign:Card Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Padding="16"
+                                                 UniformCornerRadius="4">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                                 Value="0"
+                                                 IsIndeterminate="True"
+                                                 Width="40"
+                                                 Height="40"
+                                                 Margin="0,0,0,8"/>
+                                    <TextBlock Text="Bearbetar..." 
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                    </TabItem>
+
+                    <!-- File Info -->
+                    <TabItem Header="Filinformation">
+                        <StackPanel Margin="8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="Filsökväg:" 
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,0,8,4"
+                                           Opacity="0.6"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding Transcription.FilePath}" 
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           TextWrapping="Wrap"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                           Text="Transkription ID:" 
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,8,8,4"
+                                           Opacity="0.6"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1"
+                                           Text="{Binding Transcription.Id}" 
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,8,0,0"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0"
+                                           Text="Status:" 
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,8,8,0"
+                                           Opacity="0.6"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="1"
+                                           Text="{Binding Transcription.IsCompleted, Converter={StaticResource BooleanToStringConverter}, ConverterParameter='Slutförd|Ej slutförd'}" 
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,8,0,0"/>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </materialDesign:Card>
+
+        <!-- Security Notice -->
+        <materialDesign:Card Grid.Row="4" Padding="16" Margin="0,0,0,0">
+            <TextBlock TextWrapping="Wrap" 
+                       Text="Notera: Denna transkription innehåller medicinsk data som är konfidentiell. Hantera data med försiktighet och enligt gällande sekretessföreskrifter. När du raderar transkribering säkerställs att alla relaterade filer tas bort permanent."/>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

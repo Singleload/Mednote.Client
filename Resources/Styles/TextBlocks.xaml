@@ -1,0 +1,96 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <!-- Base TextBlock Style -->
+    <Style x:Key="MednoteTextBlockBase" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignTextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="LineHeight" Value="1.5"/>
+        <Setter Property="Margin" Value="0,2"/>
+    </Style>
+
+    <!-- Heading Styles -->
+    <Style x:Key="MednoteHeading1" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignHeadline1TextBlock}">
+        <Setter Property="Margin" Value="0,16,0,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style x:Key="MednoteHeading2" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignHeadline2TextBlock}">
+        <Setter Property="Margin" Value="0,16,0,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style x:Key="MednoteHeading3" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignHeadline3TextBlock}">
+        <Setter Property="Margin" Value="0,16,0,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style x:Key="MednoteHeading4" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignHeadline4TextBlock}">
+        <Setter Property="Margin" Value="0,16,0,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style x:Key="MednoteHeading5" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignHeadline5TextBlock}">
+        <Setter Property="Margin" Value="0,16,0,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style x:Key="MednoteHeading6" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignHeadline6TextBlock}">
+        <Setter Property="Margin" Value="0,16,0,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Body Text Styles -->
+    <Style x:Key="MednoteBodyLarge" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="LineHeight" Value="1.6"/>
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+
+    <Style x:Key="MednoteBodyMedium" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody2TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="LineHeight" Value="1.6"/>
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+
+    <!-- Caption and Subtitle -->
+    <Style x:Key="MednoteCaption" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="0,2"/>
+        <Setter Property="Opacity" Value="0.7"/>
+    </Style>
+
+    <Style x:Key="MednoteSubtitle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignSubtitle1TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <!-- Status Text Styles -->
+    <Style x:Key="MednoteStatusText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody2TextBlock}">
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <Style x:Key="MednoteSuccessText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MednoteStatusText}">
+        <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+    </Style>
+
+    <Style x:Key="MednoteWarningText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MednoteStatusText}">
+        <Setter Property="Foreground" Value="{StaticResource WarningBrush}"/>
+    </Style>
+
+    <Style x:Key="MednoteErrorText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MednoteStatusText}">
+        <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+    </Style>
+
+    <!-- Timer Text Style -->
+    <Style x:Key="MednoteTimerText" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+</ResourceDictionary>

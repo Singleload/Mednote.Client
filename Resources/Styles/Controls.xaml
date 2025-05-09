@@ -1,0 +1,104 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Mednote.Client"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <!-- Converters -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <local:BooleanToStringConverter x:Key="BooleanToStringConverter" />
+    <local:BooleanToIconConverter x:Key="BooleanToIconConverter" />
+    <local:BooleanToBrushConverter x:Key="BooleanToBrushConverter" />
+    <local:TypeEqualConverter x:Key="TypeEqualConverter" />
+    <local:TypeNotEqualConverter x:Key="TypeNotEqualConverter" />
+
+    <!-- TextBox Styles -->
+    <Style x:Key="MednoteTextBoxBase" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+        <Setter Property="Margin" Value="0,8"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="4"/>
+        <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.85"/>
+        <Setter Property="materialDesign:HintAssist.FloatingOffset" Value="0,-16"/>
+    </Style>
+
+    <Style x:Key="MednoteSearchBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MednoteTextBoxBase}">
+        <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True"/>
+        <Setter Property="materialDesign:TextFieldAssist.HasLeadingIcon" Value="True"/>
+        <Setter Property="materialDesign:TextFieldAssist.LeadingIcon" Value="Magnify"/>
+    </Style>
+
+    <Style x:Key="MednoteReadOnlyTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MednoteTextBoxBase}">
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+    </Style>
+
+    <!-- ComboBox Styles -->
+    <Style x:Key="MednoteComboBox" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+        <Setter Property="Margin" Value="0,8"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="4"/>
+        <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.85"/>
+        <Setter Property="materialDesign:HintAssist.FloatingOffset" Value="0,-16"/>
+    </Style>
+
+    <!-- Card Styles -->
+    <Style x:Key="MednoteCard" TargetType="{x:Type materialDesign:Card}">
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+        <Setter Property="UniformCornerRadius" Value="8"/>
+        <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp2"/>
+    </Style>
+
+    <Style x:Key="MednoteCardHoverable" TargetType="{x:Type materialDesign:Card}" BasedOn="{StaticResource MednoteCard}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp8"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ProgressBar Styles -->
+    <Style x:Key="MednoteProgressBar" TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignLinearProgressBar}">
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="Margin" Value="0,8"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+    </Style>
+
+    <Style x:Key="MednoteCircularProgressBar" TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+    </Style>
+
+    <!-- ListView Styles -->
+    <Style x:Key="MednoteListView" TargetType="{x:Type ListView}" BasedOn="{StaticResource MaterialDesignListView}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+    </Style>
+
+    <Style x:Key="MednoteListViewItem" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+
+    <!-- TabControl Styles -->
+    <Style x:Key="MednoteTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}">
+        <Setter Property="materialDesign:ColorZoneAssist.Mode" Value="PrimaryLight"/>
+    </Style>
+
+    <Style x:Key="MednoteTabItem" TargetType="{x:Type TabItem}" BasedOn="{StaticResource MaterialDesignTabItem}">
+        <Setter Property="Padding" Value="16,8"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+</ResourceDictionary>

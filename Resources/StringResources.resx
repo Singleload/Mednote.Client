@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>Mednote</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Mednote - all rights reserved, created by Dennis Enström</value>
+  </data>
+  <data name="RecordingTab" xml:space="preserve">
+    <value>Recording</value>
+  </data>
+  <data name="HistoryTab" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="SettingsTab" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="RecordingTitle" xml:space="preserve">
+    <value>Record Conversation</value>
+  </data>
+  <data name="StartRecording" xml:space="preserve">
+    <value>Start Recording</value>
+  </data>
+  <data name="PauseRecording" xml:space="preserve">
+    <value>Pause Recording</value>
+  </data>
+  <data name="ResumeRecording" xml:space="preserve">
+    <value>Resume Recording</value>
+  </data>
+  <data name="StopRecording" xml:space="preserve">
+    <value>Stop Recording</value>
+  </data>
+  <data name="StartTranscription" xml:space="preserve">
+    <value>Start Transcription</value>
+  </data>
+  <data name="CancelTranscription" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="RecordingInstructions" xml:space="preserve">
+    <value>Press the record button to start</value>
+  </data>
+  <data name="RecordingStatus" xml:space="preserve">
+    <value>Recording...</value>
+  </data>
+  <data name="RecordingPaused" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="RecordingStopped" xml:space="preserve">
+    <value>Recording stopped</value>
+  </data>
+  <data name="TranscribingStatus" xml:space="preserve">
+    <value>Transcribing...</value>
+  </data>
+  <data name="TranscriptionCompleted" xml:space="preserve">
+    <value>Transcription completed</value>
+  </data>
+  <data name="TranscriptionCancelled" xml:space="preserve">
+    <value>Transcription cancelled</value>
+  </data>
+  <data name="RecordingTitleHint" xml:space="preserve">
+    <value>Recording title</value>
+  </data>
+  <data name="NoTranscriptionAvailable" xml:space="preserve">
+    <value>No transcription available. Start a recording first.</value>
+  </data>
+  <data name="RawTranscriptionHeader" xml:space="preserve">
+    <value>Raw transcription from Google</value>
+  </data>
+  <data name="ProcessedTextHeader" xml:space="preserve">
+    <value>Processed text from ChatGPT</value>
+  </data>
+  <data name="CopyRawText" xml:space="preserve">
+    <value>Copy raw text</value>
+  </data>
+  <data name="CopyProcessedText" xml:space="preserve">
+    <value>Copy processed text</value>
+  </data>
+  <data name="RecordingHelpText" xml:space="preserve">
+    <value>Press the record button to start a new recording. After stopping the recording, press 'Start Transcription' to send the audio to Google for transcription and processing with ChatGPT.</value>
+  </data>
+  <data name="HistoryTitle" xml:space="preserve">
+    <value>Transcription History</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search transcriptions</value>
+  </data>
+  <data name="RefreshList" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="NoTranscriptionsAvailable" xml:space="preserve">
+    <value>No transcriptions available.</value>
+  </data>
+  <data name="CreatedLabel" xml:space="preserve">
+    <value>Created:</value>
+  </data>
+  <data name="DurationLabel" xml:space="preserve">
+    <value>Duration:</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View details</value>
+  </data>
+  <data name="DeleteTranscription" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ProcessingStatus" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="CompletedStatus" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="DeleteConfirmationTitle" xml:space="preserve">
+    <value>Confirm deletion</value>
+  </data>
+  <data name="DeleteConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to delete the transcription '{0}'? Both the audio file and the transcription will be permanently deleted.</value>
+  </data>
+  <data name="TranscriptionDetailsTitle" xml:space="preserve">
+    <value>Transcription Details</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit information</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="PatientIdLabel" xml:space="preserve">
+    <value>Patient ID:</value>
+  </data>
+  <data name="NotesLabel" xml:space="preserve">
+    <value>Notes:</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="AudioRecordingTitle" xml:space="preserve">
+    <value>Audio Recording</value>
+  </data>
+  <data name="PlayAudio" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="StopPlayback" xml:space="preserve">
+    <value>Stop playback</value>
+  </data>
+  <data name="RetranscribeButton" xml:space="preserve">
+    <value>Retranscribe</value>
+  </data>
+  <data name="RetranscribeTooltip" xml:space="preserve">
+    <value>Retranscribe from the audio recording</value>
+  </data>
+  <data name="RawTranscriptionTab" xml:space="preserve">
+    <value>Raw transcription</value>
+  </data>
+  <data name="ProcessedTextTab" xml:space="preserve">
+    <value>Processed text</value>
+  </data>
+  <data name="FileInfoTab" xml:space="preserve">
+    <value>File information</value>
+  </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>File path:</value>
+  </data>
+  <data name="TranscriptionIdLabel" xml:space="preserve">
+    <value>Transcription ID:</value>
+  </data>
+  <data name="StatusLabel" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="StatusCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="StatusNotCompleted" xml:space="preserve">
+    <value>Not completed</value>
+  </data>
+  <data name="RetranscribeConfirmTitle" xml:space="preserve">
+    <value>Confirm retranscription</value>
+  </data>
+  <data name="RetranscribeConfirmMessage" xml:space="preserve">
+    <value>Are you sure you want to retranscribe? This will replace the existing transcription.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="AudioDevicesSection" xml:space="preserve">
+    <value>Audio Devices</value>
+  </data>
+  <data name="InputDeviceLabel" xml:space="preserve">
+    <value>Microphone device</value>
+  </data>
+  <data name="OutputDeviceLabel" xml:space="preserve">
+    <value>Speaker device</value>
+  </data>
+  <data name="RefreshDevices" xml:space="preserve">
+    <value>Refresh device list</value>
+  </data>
+  <data name="StorageSection" xml:space="preserve">
+    <value>Storage Location</value>
+  </data>
+  <data name="StorageDirectoryHint" xml:space="preserve">
+    <value>Recording storage folder</value>
+  </data>
+  <data name="BrowseButton" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="ClearTempFiles" xml:space="preserve">
+    <value>Clear temporary files</value>
+  </data>
+  <data name="TranscriptionOptionsSection" xml:space="preserve">
+    <value>Transcription Options</value>
+  </data>
+  <data name="AutoStartTranscription" xml:space="preserve">
+    <value>Automatically start transcription after recording stops</value>
+  </data>
+  <data name="SaveRawAudio" xml:space="preserve">
+    <value>Save raw recording (original without conversion)</value>
+  </data>
+  <data name="ApiConnectionSection" xml:space="preserve">
+    <value>API Connection</value>
+  </data>
+  <data name="ApiConnected" xml:space="preserve">
+    <value>API connected</value>
+  </data>
+  <data name="ApiDisconnected" xml:space="preserve">
+    <value>API disconnected</value>
+  </data>
+  <data name="CheckConnection" xml:space="preserve">
+    <value>Check connection</value>
+  </data>
+  <data name="AboutSection" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Mednote is a medical voice recognition and transcription program that uses Google Cloud Speech-to-Text for transcription and ChatGPT for processing.</value>
+  </data>
+  <data name="ResetDefaultsButton" xml:space="preserve">
+    <value>Reset to defaults</value>
+  </data>
+  <data name="SaveSettingsButton" xml:space="preserve">
+    <value>Save settings</value>
+  </data>
+  <data name="ResetConfirmTitle" xml:space="preserve">
+    <value>Confirm reset</value>
+  </data>
+  <data name="ResetConfirmMessage" xml:space="preserve">
+    <value>Are you sure you want to reset all settings to default values?</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="SavedSettings" xml:space="preserve">
+    <value>Settings saved.</value>
+  </data>
+  <data name="ResetSettings" xml:space="preserve">
+    <value>Settings reset.</value>
+  </data>
+  <data name="TempFilesCleared" xml:space="preserve">
+    <value>Temporary files cleared.</value>
+  </data>
+  <data name="TextCopied" xml:space="preserve">
+    <value>Text copied to clipboard.</value>
+  </data>
+  <data name="NoTextToCopy" xml:space="preserve">
+    <value>No text to copy.</value>
+  </data>
+  <data name="ChangesSaved" xml:space="preserve">
+    <value>Changes saved.</value>
+  </data>
+  <data name="ErrorStartingRecording" xml:space="preserve">
+    <value>Could not start recording: {0}</value>
+  </data>
+  <data name="ErrorPausingRecording" xml:space="preserve">
+    <value>Error pausing/resuming recording: {0}</value>
+  </data>
+  <data name="ErrorStoppingRecording" xml:space="preserve">
+    <value>Error stopping recording: {0}</value>
+  </data>
+  <data name="ErrorTranscribing" xml:space="preserve">
+    <value>Error transcribing: {0}</value>
+  </data>
+  <data name="ErrorLoadingTranscriptions" xml:space="preserve">
+    <value>Error loading transcriptions: {0}</value>
+  </data>
+  <data name="ErrorViewingDetails" xml:space="preserve">
+    <value>Error viewing transcription details: {0}</value>
+  </data>
+  <data name="ErrorDeletingTranscription" xml:space="preserve">
+    <value>Error deleting transcription: {0}</value>
+  </data>
+  <data name="ErrorDeleteFailed" xml:space="preserve">
+    <value>Could not delete the transcription.</value>
+  </data>
+  <data name="ErrorLoadingTranscription" xml:space="preserve">
+    <value>Error loading transcription: {0}</value>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>Transcription could not be found.</value>
+  </data>
+  <data name="ErrorPlayingAudio" xml:space="preserve">
+    <value>Error playing audio: {0}</value>
+  </data>
+  <data name="ErrorCopyingText" xml:space="preserve">
+    <value>Error copying text: {0}</value>
+  </data>
+  <data name="ErrorSavingChanges" xml:space="preserve">
+    <value>Error saving changes: {0}</value>
+  </data>
+  <data name="ErrorLoadingSettings" xml:space="preserve">
+    <value>Error loading settings: {0}</value>
+  </data>
+  <data name="ErrorSavingSettings" xml:space="preserve">
+    <value>Error saving settings: {0}</value>
+  </data>
+  <data name="ErrorResettingSettings" xml:space="preserve">
+    <value>Error resetting settings: {0}</value>
+  </data>
+  <data name="ErrorUpdatingDevices" xml:space="preserve">
+    <value>Error updating audio devices: {0}</value>
+  </data>
+  <data name="ErrorBrowsingDirectory" xml:space="preserve">
+    <value>Error choosing storage directory: {0}</value>
+  </data>
+  <data name="ErrorClearingTempFiles" xml:space="preserve">
+    <value>Error clearing temporary files: {0}</value>
+  </data>
+  <data name="ErrorNoMicrophone" xml:space="preserve">
+    <value>No microphone found.</value>
+  </data>
+  <data name="ErrorNoSpeaker" xml:space="preserve">
+    <value>No speaker found.</value>
+  </data>
+  <data name="ErrorNoRecording" xml:space="preserve">
+    <value>No recording to transcribe.</value>
+  </data>
+  <data name="ErrorTimeoutTranscription" xml:space="preserve">
+    <value>Transcription timed out. The audio file may be too large.</value>
+  </data>
+  <data name="ErrorTimeoutProcessing" xml:space="preserve">
+    <value>Processing timed out.</value>
+  </data>
+  <data name="ErrorServerResponse" xml:space="preserve">
+    <value>Could not parse server response</value>
+  </data>
+  <data name="ErrorStorageDirectory" xml:space="preserve">
+    <value>Could not find or create storage directory.</value>
+  </data>
+  <data name="ErrorFileNotFound" xml:space="preserve">
+    <value>Audio file could not be found</value>
+  </data>
+  <data name="ErrorUnexpected" xml:space="preserve">
+    <value>An unexpected error occurred: {0}</value>
+  </data>
+  <data name="ErrorStartupFailed" xml:space="preserve">
+    <value>An unexpected error occurred during program startup: {0}</value>
+  </data>
+  <data name="ErrorStartupTitle" xml:space="preserve">
+    <value>Startup Error</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorFatal" xml:space="preserve">
+    <value>A serious error has occurred and the program must close: {0}</value>
+  </data>
+  <data name="ErrorFatalTitle" xml:space="preserve">
+    <value>Critical Error</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="Saving" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="Deleting" xml:space="preserve">
+    <value>Deleting...</value>
+  </data>
+  <data name="DefaultRecordingTitle" xml:space="preserve">
+    <value>Recording {0:yyyy-MM-dd HH:mm}</value>
+  </data>
+  <data name="ApiConfigurationError" xml:space="preserve">
+    <value>API configuration error</value>
+  </data>
+  <data name="RecordingDeviceInUse" xml:space="preserve">
+    <value>Microphone is already in use by another program.</value>
+  </data>
+  <data name="PlaybackDeviceInUse" xml:space="preserve">
+    <value>Playback device in use by another program.</value>
+  </data>
+  <data name="UnsupportedAudioFormat" xml:space="preserve">
+    <value>Unsupported audio format</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Network error</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Server error: {0}</value>
+  </data>
+  <data name="ServerUnavailable" xml:space="preserve">
+    <value>The server is unavailable. Check your connection.</value>
+  </data>
+  <data name="SavingRecording" xml:space="preserve">
+    <value>Saving recording...</value>
+  </data>
+  <data name="PreparingAudio" xml:space="preserve">
+    <value>Preparing audio...</value>
+  </data>
+  <data name="SendingToGoogle" xml:space="preserve">
+    <value>Sending to Google Speech-to-Text...</value>
+  </data>
+  <data name="SendingToChatGPT" xml:space="preserve">
+    <value>Sending to ChatGPT for processing...</value>
+  </data>
+  <data name="ReceivedTranscription" xml:space="preserve">
+    <value>Recieved transcription</value>
+  </data>
+  <data name="ReceivedProcessedText" xml:space="preserve">
+    <value>Recieved processed text</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Signing in...</value>
+  </data>
+  <data name="CheckingAPI" xml:space="preserve">
+    <value>Checking API status...</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>No internet connection.</value>
+  </data>
+  <data name="ConfirmExit" xml:space="preserve">
+    <value>Are you sure you want to exit?</value>
+  </data>
+  <data name="ConfirmExitRecording" xml:space="preserve">
+    <value>A recording is undergoing. Are you sure you want to exit?</value>
+  </data>
+  <data name="ConfirmExitTitle" xml:space="preserve">
+    <value>Confirm exit</value>
+  </data>
+  <data name="RecordingDuration" xml:space="preserve">
+    <value>Recording duration: {0}</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>File size: {0}</value>
+  </data>
+</root>
